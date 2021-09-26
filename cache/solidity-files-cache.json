@@ -1,6 +1,40 @@
 {
   "_format": "hh-sol-cache-2",
   "files": {
+    "/home/pradhumnapancholi/Projects/DeFiPedia/defipedia-protocol/contracts/DefipediaGovernor.sol": {
+      "lastModificationDate": 1632628596275,
+      "contentHash": "81d74b40374d10c0d846e5d215cb0db0",
+      "sourceName": "contracts/DefipediaGovernor.sol",
+      "solcConfig": {
+        "version": "0.8.0",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "DefipediaGovernor"
+      ]
+    },
     "/home/pradhumnapancholi/Projects/DeFiPedia/defipedia-protocol/contracts/WikiToken.sol": {
       "lastModificationDate": 1632625726148,
       "contentHash": "55c9815f5fc25e795c305dadd7de73f2",
