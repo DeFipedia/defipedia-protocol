@@ -1,11 +1,11 @@
 // SPDX-License-Identifier: GPL-3.0//
 pragma solidity ^0.8.0;
 
-import '@openzeppelin/contracts/governance/Governor.sol';
-import '@openzeppelin/contracts/governance/extensions/GovernorVotes.sol';
-import '@openzeppelin/contracts/governance/extensions/GovernorVotesQuorumFraction.sol';
-import '@openzeppelin/contracts/governance/extensions/GovernorTimelockControl.sol';
-import '@openzeppelin/contracts/governance/compatibility/GovernorCompatibilityBravo.sol';
+import "@openzeppelin/contracts/governance/Governor.sol";
+import "@openzeppelin/contracts/governance/extensions/GovernorVotes.sol";
+import "@openzeppelin/contracts/governance/extensions/GovernorVotesQuorumFraction.sol";
+import "@openzeppelin/contracts/governance/extensions/GovernorTimelockControl.sol";
+import "@openzeppelin/contracts/governance/compatibility/GovernorCompatibilityBravo.sol";
 
 /// @title DefipediaDAO
 /// @author Pradhumna Pancholi
@@ -17,7 +17,7 @@ contract DefipediaDAO is
     GovernorTimelockControl
 {
     constructor(ERC20Votes _token, TimelockController _timelock)
-        Governor('DefipediaDAO')
+        Governor("DefipediaDAO")
         GovernorVotes(_token)
         GovernorVotesQuorumFraction(4)
         GovernorTimelockControl(_timelock)
@@ -68,7 +68,11 @@ contract DefipediaDAO is
         uint256[] memory values,
         bytes[] memory calldatas,
         string memory description
-    ) public override(Governor, GovernorCompatibilityBravo, IGovernor) returns (uint256) {
+    )
+        public
+        override(Governor, GovernorCompatibilityBravo, IGovernor)
+        returns (uint256)
+    {
         return super.propose(targets, values, calldatas, description);
     }
 
