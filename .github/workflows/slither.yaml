@@ -1,8 +1,8 @@
-name: Slither Analyzer
+name: Slither Analysis
 on: [push]
 jobs:
   build:
-  runs-on: ubuntu-latest
+    runs-on: ubuntu-latest
   # declaring versions
   strategy:
     matrix:
