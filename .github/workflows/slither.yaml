@@ -1,7 +1,7 @@
 name: Slither Analyzer
 on: [push]
 jobs:
-  Perform-Slither-Analyzer:
+  build:
   runs-on: ubuntu-latest
   # declaring versions
   strategy:
