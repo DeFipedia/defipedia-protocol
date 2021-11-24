@@ -1,42 +1,54 @@
-name: Slither Analysis
-on: [push]
+name: Static Analysis
 on:
   push:
-    branches: ['*']
+    branches: [main, develop]
     paths:
       - "contracts/**"
       - ".github/workflows/slither.yaml"
+  pull_request:
+    branches: [main, develop]
+    paths:
+      - "contracts/**"
+
 jobs:
   build:
     runs-on: ubuntu-latest
-  # declaring versions
-  strategy:
-    matrix:
-      python-version: [3.8]
-      node-version: [14.x]
+    strategy:
+      matrix:
+        python-version: [3.8, 3.9]
+        node-version: [14.x]
 
-  steps:
-    # - uses: actions/checkout@v2
-    # Install Node.js
-    - name: Use Node.js ${{matrix.node-version}}
-      uses: actions/setup-node@v1
-      with:
-        node-version: ${{matrix.node-version}}
-    - run: npm install
-    - run: npm run compile
-    # Install python
-    - name: Setup Python ${{matrix.python-version}}
-      uses: actions/setup-python@v2
-      with:
-        python-version: ${{matrix.python-version}}
-    # Install dependencies - using pip to install slither-analyzer and solc-select (depenedencies here don't mean project dependencies as package.json have them]
-    - name: Install dependencies
-      run: |
-        sudo snap install solc
-        python -m pip install --upgrade pip
-        pip install slither-analyzer==0.8.1 solc-select==0.2.1
-    # use slither and print human-summary
-    - name: Summary of static-analysis
-      run: |
-        slither . --print human-summary
-      # TODO: maybe add a command to save, send discord, slack, or email notification of the report
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - run: yarn install
+      - run: yarn compile
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install dependencies
+        run: |
+          sudo snap install solc
+          python -m pip install --upgrade pip
+          pip install slither-analyzer==0.8.1 solc-select==0.2.1
+      - name: Summary of static ananlysis
+        run: |
+          slither . --print human-summary
+      - name: Contract summary of static ananlysis
+        run: |
+          slither . --print contract-summary
+      - name: Function summary
+        run: |
+          slither . --print function-summary
+      - name: Inheritance
+        run: |
+          slither . --print inheritance
+      - name: Data dependency
+        run: |
+          slither . --print data-dependency
