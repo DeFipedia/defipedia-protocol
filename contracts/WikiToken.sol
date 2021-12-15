@@ -33,10 +33,7 @@ contract WikiToken is Context, AccessControl, ERC20, ERC20Permit, ERC20Votes {
 
     /// @param to, the address to send minted tokens
     /// @param amount, the amount of tokens to burn
-    function _mint(address to, uint256 amount)
-        internal
-        override(ERC20, ERC20Votes)
-    {
+    function _mint(address to, uint256 amount) internal override(ERC20, ERC20Votes) {
         /// check if calling account has MINTER_ROLE
         require(
             hasRole(Roles.MINTER_ROLE, _msgSender()),
@@ -48,10 +45,7 @@ contract WikiToken is Context, AccessControl, ERC20, ERC20Permit, ERC20Votes {
     /// @dev Burns the amount of token from the address provided
     /// @param account the account to burn tokens from (needs allowance)
     /// @param amount the amount of token to burn from given account (amount can not exceeds alloawance)
-    function _burn(address account, uint256 amount)
-        internal
-        override(ERC20, ERC20Votes)
-    {
+    function _burn(address account, uint256 amount) internal override(ERC20, ERC20Votes) {
         super._burn(account, amount);
     }
 }
